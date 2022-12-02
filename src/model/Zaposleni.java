@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,27 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
     private String username;
     private String password;
     private boolean predaje;
+
+    public Zaposleni() {
+    }
+
+    public Zaposleni(int zaposleniID, String ime, String prezime, String username, String password, boolean predaje) {
+        this.zaposleniID = zaposleniID;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.username = username;
+        this.password = password;
+        this.predaje = predaje;
+    }
+    public Zaposleni( String ime, String prezime, String username, String password, boolean predaje) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.username = username;
+        this.password = password;
+        this.predaje = predaje;
+    }
+    
+    
 
     public int getZaposleniID() {
         return zaposleniID;
@@ -76,7 +98,7 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         return hash;
     }
 
@@ -92,23 +114,12 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
             return false;
         }
         final Zaposleni other = (Zaposleni) obj;
-        if (this.zaposleniID != other.zaposleniID) {
-            return false;
-        }
-        if (this.predaje != other.predaje) {
-            return false;
-        }
-        if (!Objects.equals(this.ime, other.ime)) {
-            return false;
-        }
-        if (!Objects.equals(this.prezime, other.prezime)) {
-            return false;
-        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         return Objects.equals(this.password, other.password);
     }
+
     
     
     
@@ -120,7 +131,19 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("zaposleni.zaposleniID");
+            String ime = rs.getString("zaposleni.ime");
+            String prezime = rs.getString("zaposleni.prezime");
+            String email = rs.getString("zaposleni.username");
+            String lozinka = rs.getString("zaposleni.password");
+            boolean predaje = rs.getBoolean("zaposleni.predaje");
+            Zaposleni zaposleni = new Zaposleni(id, ime, prezime, email, lozinka, predaje);
+            System.out.println(zaposleni);
+            lista.add(zaposleni);
+        }
+        return lista;
     }
 
     @Override
@@ -130,7 +153,7 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return "'" + ime + "','" + prezime + "'"+"'" + username + "','" + password + "'," + predaje;
     }
 
     @Override
@@ -145,7 +168,7 @@ public class Zaposleni implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return "ime = '" + ime + "',prezime='" + prezime + "'"+"username = '" + username + "',password='"+password + ", predaje= "+ predaje;
     }
     
     

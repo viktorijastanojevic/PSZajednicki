@@ -20,6 +20,18 @@ public class Kandidat implements ApstraktniDomenskiObjekat {
     private String brojTelefona;
     private String adresa;
 
+    public Kandidat() {
+    }
+
+    public Kandidat(int kandidatID, String ime, String prezime, String brojTelefona, String adresa) {
+        this.kandidatID = kandidatID;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.brojTelefona = brojTelefona;
+        this.adresa = adresa;
+    }
+
+    
     public int getKandidatID() {
         return kandidatID;
     }
