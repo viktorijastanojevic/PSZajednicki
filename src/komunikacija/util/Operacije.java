@@ -9,6 +9,7 @@ package komunikacija.util;
  * @author Viktorija
  */
 public enum Operacije {
-    LOGIN,
+    LOGIN, 
+    UCITAJ_KANDIDATE,
     
 }

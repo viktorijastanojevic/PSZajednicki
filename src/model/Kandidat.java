@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -119,7 +120,19 @@ public class Kandidat implements ApstraktniDomenskiObjekat {
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+ List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("kandidat.kandidatID");
+            String ime = rs.getString("kandidat.ime");
+            String prezime = rs.getString("kandidat.prezime");
+            String brojTelefona = rs.getString("kandidat.brojTelefona");
+            String adresa = rs.getString("kandidat.adresa");
+            
+            Kandidat kandidat = new Kandidat(id, ime, prezime, brojTelefona, adresa);
+            System.out.println(kandidat);
+            lista.add(kandidat);
+        }
+        return lista;
     }
 
     @Override
