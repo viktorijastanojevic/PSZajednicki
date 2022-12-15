@@ -11,5 +11,6 @@ package komunikacija.util;
 public enum Operacije {
     LOGIN, 
     UCITAJ_KANDIDATE,
+    ZAPAMTI_KANDIDATA,
     
 }

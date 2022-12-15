@@ -142,7 +142,7 @@ public class Kandidat implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return "'" + ime + "','" + prezime + "','" + brojTelefona + "','" + adresa + "'";
     }
 
     @Override
@@ -152,12 +152,22 @@ public class Kandidat implements ApstraktniDomenskiObjekat {
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    ApstraktniDomenskiObjekat kandidat = null;
+        while (rs.next()) {
+             int kandidatID = rs.getInt("kandidat.kandidatID");
+            String ime = rs.getString("kandidat.ime"); 
+            String prezime = rs.getString("kandidat.prezime");
+            String brojTelefona = rs.getString("kandidat.brojTelefona"); 
+            String adresa=rs.getString("kandidat.adresa");
+            kandidat = new Kandidat(kandidatID, ime, prezime, brojTelefona, adresa);
+            System.out.println(kandidat);
+        }
+    return kandidat;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    return "ime = '" + ime +"',prezime = '" + prezime+ "',brojTelefona='" + brojTelefona + "',adresa='" + adresa + "'";
     }
     
 }
